@@ -27,45 +27,47 @@ function createAttributable(node, obj) {
 }
 
 function elt(type, attribute = {}, ...children) {
-  elt.prototype.props = {}
+  //elt.prototype.props = {}
   let node = document.createElement(type);
-  let PropState = createAttributable(node, attribute);
+  //let PropState = createAttributable(node, attribute);
   // console.log(PropState)
   for (let child of children) {
-    // if it an array, evaluate it and pipe it to
-    // to the parent node
-
-    // else check if it a string or another function
-    // and PIPE to the node
+    /** if child[ren] is an array, evaluate it and pipe it to
+      to the parent node.
+      else check if it a string or another function
+     and PIPE to the node*/
     try {
+      /** if child[ren] is an Array(), collect each child and PIPE */
       if (Array.isArray(child)) {
         const [...arraychild] = [...child];
         for (let child of arraychild){
           node.appendChild(child);
         }
-      }else{
+      }/**Since it isnot a Array, handlethem the best way ReactiDOM can. */
+      else{
          if (typeof child == "string") {
           node.appendChild(document.createTextNode(child))
         }else if(typeof child == "number"){
-          node.appendChild(document.createTextNode(child));
+          node.appendChild(document.createTextNode(String(child)));
         }else{
           node.appendChild(child)
         }
       }
     } catch (error) {
-      console.error('ReactiDOM err: something wrong : your argument cannot be rendered.\nYou could be rendering an "object" which doesnot fit interface. Whatever, please kindly cross-check your argument.');
+      console.error('ReactiDOM err: something wrong : your argument cannot be rendered.\nYou could be rendering an "object" which doesnot fit ReactiDom present interface. Whatever, please kindly cross-check your argument.');
     }
   }
   return node;
 }
 
-function createDom(Element, NODE) {
+
+/** This function tries to simulate reactDOM as much as possible except for THE-VIRTUAL-DOM */
+function createDom(Element:any, NODE:String) {
   if (typeof Element === "string") {
     Element = document.getElementById(Element);
   }
-
   let nn = Element.appendChild(NODE);
-  console.log(nn);
+  //console.log(nn);
   return nn;
 }
 

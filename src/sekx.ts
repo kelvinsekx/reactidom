@@ -1,3 +1,5 @@
+import  createDom from "./create_dom";
+
 function ENSURE_IT_IS_VALID_ATTRIBUTE(attributeName) {
   return ["class", "id", "style", "contenteditable", "onclick"].includes(
     attributeName
@@ -62,14 +64,6 @@ function elt(type, attribute = {}, ...children) {
 
 
 /** This function tries to simulate reactDOM as much as possible except for THE-VIRTUAL-DOM */
-function createDom(Element:any, NODE:String) {
-  if (typeof Element === "string") {
-    Element = document.getElementById(Element);
-  }
-  let nn = Element.appendChild(NODE);
-  //console.log(nn);
-  return nn;
-}
 
 function REPLACE_EXISTING_ELEMENT(Element, newNode) {
   return Element.childNodes[0].replaceWith(newNode);

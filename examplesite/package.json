@@ -1,8 +1,8 @@
 {
-  "name": "ReactiDom",
-  "version": "0.0.1",
+  "name": "examplesite",
+  "version": "1.0.0",
   "description": "",
-  "main": "scripts.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

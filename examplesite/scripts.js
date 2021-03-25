@@ -33,5 +33,8 @@ const Menu = ({ recipes, title})=> {
     return elt("div", null, "Hii")
   }
 }
-
-render(document.body, Menu({ recipes: data, title:"Delicious Us"}));
+// Menu({ recipes: data, title:"Delicious Us"})
+const tryThis = (props)=>{
+  elt(p, null, props.name)
+}
+render(document.body, tryThis({name: 'kelvin'}));

@@ -1,13 +1,14 @@
-const http = require('http')
+const express = require("express")
+const cwd = process.cwd();
+const path = require("path")
+const router = express.Router()
 
-const app = http.createServer(
-    (req, res)=>{
-        if(req.url == '/'){
-            res.writeHead(200, {'Content-Type': "text/plain"})
-            res.end("stuff not working fine")
-        }
-        console.log(req)
-    }
-)
+const app = express();
 
-app.listen(3001, ()=>console.log('started'))
+app.use("/",  express.static(path.join(cwd, "public")));
+app.use("/dist/sekx.js",  express.static(path.join(cwd, "../dist/sekx.js")));
+router.get("/", (req, res)=>res.sendFile(path.join(cwd, "index.html")))
+
+
+app.use("/", router)
+app.listen(4000, ()=> console.log("started at %s", 4000))

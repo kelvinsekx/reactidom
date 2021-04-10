@@ -1,4 +1,3 @@
-"use strict";
 var __spreadArrays = (this && this.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
@@ -45,10 +44,10 @@ function elt(type, attribute) {
     // console.log(PropState)
     for (var _a = 0, children_1 = children; _a < children_1.length; _a++) {
         var child = children_1[_a];
-        // if it an array, evaluate it and pipe it to
-        // to the parent node
-        // else check if it a string or another function
-        // and PIPE to the node
+        /** if child[ren] is an array, evaluate it and pipe it to
+          to the parent node.
+          else check if it a string or another function
+         and PIPE to the node*/
         try {
             /** if child[ren] is an Array(), collect each child and PIPE */
             if (Array.isArray(child)) {
@@ -63,7 +62,7 @@ function elt(type, attribute) {
                     node.appendChild(document.createTextNode(child));
                 }
                 else if (typeof child == "number") {
-                    node.appendChild(document.createTextNode(child));
+                    node.appendChild(document.createTextNode(String(child)));
                 }
                 else {
                     node.appendChild(child);
@@ -76,47 +75,9 @@ function elt(type, attribute) {
     }
     return node;
 }
-function createDom(Element, NODE) {
-    if (typeof Element === "string") {
-        Element = document.getElementById(Element);
-    }
-    var nn = Element.appendChild(NODE);
-    console.log(nn);
-    return nn;
-}
+/** This function tries to simulate reactDOM as much as possible except for THE-VIRTUAL-DOM */
 function REPLACE_EXISTING_ELEMENT(Element, newNode) {
     return Element.childNodes[0].replaceWith(newNode);
 }
-function render(Element, NODE) {
-    /**
-     ## After we append it to the DOM;
-     ## We check if the DOM is mounted before,
-     ## if true,
-     ## We simply update the DOM
-     */
-    if (Element.children.length < 1) {
-        createDom(Element, NODE);
-        return;
-    }
-    if (Element.children.length >= 1) {
-        /**
-        ## This :
-        ## Element.parentNode.replaceChild(NODE, Element.firstChild);
-        ## was the old way and it is problematic. At
-        ## least for me.
-        ## You can help me with why it didnot work.
-        ## YOUR answer would be availbale in this comment with
-        ## due attribution
-        */
-        /**
-         ## If the Old node and New node is same
-         ## Do nothing
-         */
-        if (Element.childNodes[0].isEqualNode(NODE)) {
-            return;
-        }
-        REPLACE_EXISTING_ELEMENT(Element, NODE);
-        return;
-    }
-}
+export { REPLACE_EXISTING_ELEMENT, elt, createAttributable, ENSURE_IT_IS_VALID_ATTRIBUTE };
 //# sourceMappingURL=sekx.js.map

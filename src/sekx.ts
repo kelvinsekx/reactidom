@@ -1,4 +1,4 @@
-import  createDom from "./create_dom";
+
 
 function ENSURE_IT_IS_VALID_ATTRIBUTE(attributeName) {
   return ["class", "id", "style", "contenteditable", "onclick"].includes(
@@ -65,39 +65,8 @@ function elt(type, attribute = {}, ...children) {
 
 /** This function tries to simulate reactDOM as much as possible except for THE-VIRTUAL-DOM */
 
-function REPLACE_EXISTING_ELEMENT(Element, newNode) {
+ function REPLACE_EXISTING_ELEMENT(Element, newNode) {
   return Element.childNodes[0].replaceWith(newNode);
 }
 
-function render(Element, NODE) {
-  /**
-   ## After we append it to the DOM;
-   ## We check if the DOM is mounted before,
-   ## if true,  
-   ## We simply update the DOM
-   */
-  if (Element.children.length < 1) {
-    createDom(Element, NODE);
-    return;
-  }
-  if (Element.children.length >= 1) {
-    /**  
-    ## This :
-    ## Element.parentNode.replaceChild(NODE, Element.firstChild);
-    ## was the old way and it is problematic. At 
-    ## least for me.
-    ## You can help me with why it didnot work.
-    ## YOUR answer would be availbale in this comment with
-    ## due attribution
-    */
-    /**
-     ## If the Old node and New node is same 
-     ## Do nothing
-     */
-    if(Element.childNodes[0].isEqualNode(NODE)){
-      return;
-    }
-    REPLACE_EXISTING_ELEMENT(Element, NODE);
-    return;
-  }
-}
+export {REPLACE_EXISTING_ELEMENT, elt, createAttributable,ENSURE_IT_IS_VALID_ATTRIBUTE }
